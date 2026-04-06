@@ -13,7 +13,7 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FF6B6B 0%, #FFA500 50%, #FFD700 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -24,109 +24,148 @@
         .container {
             background-color: white;
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
             width: 100%;
         }
         
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+        }
+        
+        .header .emoji-group {
+            font-size: 50px;
+            margin-bottom: 15px;
+            letter-spacing: 15px;
         }
         
         .header h1 {
-            color: #333;
-            font-size: 28px;
+            color: #2c3e50;
+            font-size: 32px;
             margin-bottom: 10px;
+            font-weight: 700;
         }
         
         .header p {
-            color: #666;
+            color: #7f8c8d;
             font-size: 16px;
         }
         
-        .emoji {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-        
         .options-section {
-            margin: 30px 0;
+            margin: 35px 0;
         }
         
         .option-item {
             display: flex;
             align-items: center;
-            margin: 15px 0;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
+            margin: 18px 0;
+            padding: 18px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
+            border-left: 5px solid #FF6B6B;
         }
         
         .option-item:hover {
-            background-color: #f0f0f0;
-            transform: translateX(5px);
+            background: linear-gradient(135deg, #e8f0f7 0%, #b5d8f0 100%);
+            transform: translateX(8px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.2);
         }
         
         .option-item input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             cursor: pointer;
             margin-right: 15px;
+            accent-color: #FF6B6B;
         }
         
         .option-label {
             flex: 1;
-            color: #333;
+            color: #2c3e50;
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 600;
+        }
+        
+        .option-emoji {
+            font-size: 32px;
+            margin-right: 12px;
         }
         
         .option-number {
-            background-color: #667eea;
+            background-color: #FF6B6B;
             color: white;
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-weight: bold;
-            margin-right: 10px;
+            margin-right: 12px;
+            font-size: 16px;
         }
         
-        .form-section {
+        .services-forms-container {
             display: none;
-            margin-top: 30px;
+            margin-top: 35px;
             padding-top: 30px;
-            border-top: 2px solid #eee;
+            border-top: 3px solid #ecf0f1;
         }
         
-        .form-section.active {
+        .services-forms-container.active {
             display: block;
         }
         
+        .service-form {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #FFA500;
+            display: none;
+        }
+        
+        .service-form.active {
+            display: block;
+        }
+        
+        .service-form-title {
+            color: #2c3e50;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .service-form-title .emoji {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         
         .form-group label {
             display: block;
-            color: #333;
+            color: #2c3e50;
             font-weight: 600;
             margin-bottom: 8px;
+            font-size: 14px;
         }
         
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 2px solid #ddd;
-            border-radius: 5px;
-            font-family: Arial, sans-serif;
+            border-radius: 6px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-size: 14px;
             transition: border-color 0.3s ease;
         }
@@ -134,52 +173,70 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #FF6B6B;
+            box-shadow: 0 0 8px rgba(255, 107, 107, 0.2);
         }
         
         .form-group textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 90px;
         }
         
-        .selected-options {
-            background-color: #f0f0f0;
-            padding: 15px;
-            border-radius: 5px;
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        .form-group input.error,
+        .form-group textarea.error {
+            border-color: #e74c3c;
+            background-color: #fadbd8;
+        }
+        
+        .contact-section {
+            display: none;
+            background-color: #f0f8f7;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #FFD700;
+        }
+        
+        .contact-section.active {
+            display: block;
+        }
+        
+        .contact-section h3 {
+            color: #2c3e50;
+            font-size: 18px;
+            font-weight: 700;
             margin-bottom: 20px;
-        }
-        
-        .selected-options p {
-            color: #666;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        .selected-list {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+            align-items: center;
         }
         
-        .selected-tag {
-            background-color: #667eea;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 14px;
+        .contact-section h3 .emoji {
+            font-size: 24px;
+            margin-right: 10px;
         }
         
         .buttons {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             margin-top: 30px;
         }
         
         button {
             flex: 1;
-            padding: 12px 20px;
+            padding: 14px 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
@@ -187,165 +244,408 @@
         }
         
         .submit-btn {
-            background-color: #667eea;
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
             color: white;
         }
         
-        .submit-btn:hover {
-            background-color: #5568d3;
+        .submit-btn:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+        
+        .submit-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            opacity: 0.6;
         }
         
         .reset-btn {
-            background-color: #ddd;
-            color: #333;
+            background-color: #e8e8e8;
+            color: #2c3e50;
         }
         
         .reset-btn:hover {
-            background-color: #ccc;
+            background-color: #d5d5d5;
         }
         
         .success-message {
             display: none;
-            background-color: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-            border: 1px solid #c3e6cb;
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 18px;
+            border-radius: 6px;
+            margin-top: 25px;
+            border-left: 4px solid #229954;
+            font-weight: 600;
         }
         
         .success-message.show {
             display: block;
+            animation: slideIn 0.4s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .required-indicator {
+            color: #e74c3c;
+            margin-left: 4px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div class="emoji">✏️📚</div>
-            <h1>Hello There! Good to see you.</h1>
-            <p>What can we help you with today?</p>
+            <div class="emoji-group">✏️📚✈️</div>
+            <h1>Pen Crafters</h1>
+            <p>Your Learning, Your Way! What can we help you with today?</p>
         </div>
         
         <div class="options-section">
             <div class="option-item">
                 <div class="option-number">1</div>
-                <input type="checkbox" id="option1" name="service" value="Homework/Assignment help">
-                <label for="option1" class="option-label">Homework/Assignment help</label>
+                <div class="option-emoji">📖</div>
+                <input type="checkbox" id="option1" name="service" value="Research Paper Writing">
+                <label for="option1" class="option-label">Research Paper Writing</label>
             </div>
             
             <div class="option-item">
                 <div class="option-number">2</div>
-                <input type="checkbox" id="option2" name="service" value="PPT Preparation">
-                <label for="option2" class="option-label">PPT Preparation</label>
+                <div class="option-emoji">✍️</div>
+                <input type="checkbox" id="option2" name="service" value="Essay Crafting">
+                <label for="option2" class="option-label">Essay Crafting</label>
             </div>
             
             <div class="option-item">
                 <div class="option-number">3</div>
-                <input type="checkbox" id="option3" name="service" value="Record">
-                <label for="option3" class="option-label">Record</label>
+                <div class="option-emoji">✈️</div>
+                <input type="checkbox" id="option3" name="service" value="Travel Writing">
+                <label for="option3" class="option-label">Travel Writing</label>
             </div>
             
             <div class="option-item">
                 <div class="option-number">4</div>
-                <input type="checkbox" id="option4" name="service" value="PPT review">
-                <label for="option4" class="option-label">PPT review</label>
+                <div class="option-emoji">📚</div>
+                <input type="checkbox" id="option4" name="service" value="Book Summarization">
+                <label for="option4" class="option-label">Book Summarization</label>
             </div>
         </div>
         
-        <form id="detailsForm" class="form-section">
-            <div class="selected-options">
-                <p>Selected Services:</p>
-                <div class="selected-list" id="selectedList"></div>
+        <div class="services-forms-container" id="servicesContainer">
+            <!-- Research Paper Form -->
+            <div class="service-form" id="form1">
+                <div class="service-form-title">
+                    <span class="emoji">📖</span>
+                    <span>Research Paper Writing</span>
+                </div>
+                <div class="form-group">
+                    <label for="topic1">Research Topic <span class="required-indicator">*</span></label>
+                    <input type="text" id="topic1" placeholder="Enter your research topic" required>
+                    <div class="error-message" id="error1"></div>
+                </div>
+                <div class="form-group">
+                    <label for="description1">Description <span class="required-indicator">*</span></label>
+                    <textarea id="description1" placeholder="Provide details about your research paper requirements" required></textarea>
+                    <div class="error-message" id="error-desc1"></div>
+                </div>
             </div>
             
-            <div class="form-group">
-                <label for="topic">Concept/Topic:</label>
-                <input type="text" id="topic" name="topic" placeholder="Enter the main concept or topic" required>
+            <!-- Essay Crafting Form -->
+            <div class="service-form" id="form2">
+                <div class="service-form-title">
+                    <span class="emoji">✍️</span>
+                    <span>Essay Crafting</span>
+                </div>
+                <div class="form-group">
+                    <label for="topic2">Essay Topic <span class="required-indicator">*</span></label>
+                    <input type="text" id="topic2" placeholder="Enter your essay topic" required>
+                    <div class="error-message" id="error2"></div>
+                </div>
+                <div class="form-group">
+                    <label for="description2">Description <span class="required-indicator">*</span></label>
+                    <textarea id="description2" placeholder="Provide essay guidelines and requirements" required></textarea>
+                    <div class="error-message" id="error-desc2"></div>
+                </div>
             </div>
             
-            <div class="form-group">
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" placeholder="Provide a detailed description for your selected options" required></textarea>
+            <!-- Travel Writing Form -->
+            <div class="service-form" id="form3">
+                <div class="service-form-title">
+                    <span class="emoji">✈️</span>
+                    <span>Travel Writing</span>
+                </div>
+                <div class="form-group">
+                    <label for="topic3">Travel Destination <span class="required-indicator">*</span></label>
+                    <input type="text" id="topic3" placeholder="Enter your travel destination or theme" required>
+                    <div class="error-message" id="error3"></div>
+                </div>
+                <div class="form-group">
+                    <label for="description3">Description <span class="required-indicator">*</span></label>
+                    <textarea id="description3" placeholder="Describe your travel writing experience and expectations" required></textarea>
+                    <div class="error-message" id="error-desc3"></div>
+                </div>
             </div>
             
-            <div class="buttons">
-                <button type="submit" class="submit-btn">Submit</button>
-                <button type="reset" class="reset-btn">Clear</button>
+            <!-- Book Summarization Form -->
+            <div class="service-form" id="form4">
+                <div class="service-form-title">
+                    <span class="emoji">📚</span>
+                    <span>Book Summarization</span>
+                </div>
+                <div class="form-group">
+                    <label for="topic4">Book Title <span class="required-indicator">*</span></label>
+                    <input type="text" id="topic4" placeholder="Enter the book title" required>
+                    <div class="error-message" id="error4"></div>
+                </div>
+                <div class="form-group">
+                    <label for="description4">Description <span class="required-indicator">*</span></label>
+                    <textarea id="description4" placeholder="Provide any specific focus areas for the summary" required></textarea>
+                    <div class="error-message" id="error-desc4"></div>
+                </div>
             </div>
-        </form>
+            
+            <!-- Contact Information Section -->
+            <div class="contact-section" id="contactSection">
+                <h3>
+                    <span class="emoji">📧</span>
+                    <span>Contact Information</span>
+                </h3>
+                <div class="form-group">
+                    <label for="gmail">Gmail Address <span class="required-indicator">*</span></label>
+                    <input type="email" id="gmail" placeholder="your.email@gmail.com" required>
+                    <div class="error-message" id="gmailError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="instagram">Instagram ID <span class="required-indicator">*</span></label>
+                    <input type="text" id="instagram" placeholder="@your_instagram_id" required>
+                    <div class="error-message" id="instagramError"></div>
+                </div>
+            </div>
+            
+            <form id="detailsForm">
+                <div class="buttons">
+                    <button type="submit" class="submit-btn" id="submitBtn">Submit All</button>
+                    <button type="reset" class="reset-btn" id="resetBtn">Clear All</button>
+                </div>
+            </form>
+        </div>
         
         <div class="success-message" id="successMessage">
-            ✓ Your request has been submitted successfully!
+            ✓ Your request has been submitted successfully! We'll get back to you soon.
         </div>
     </div>
     
     <script>
         const checkboxes = document.querySelectorAll('input[name="service"]');
-        const form = document.getElementById('detailsForm');
-        const selectedList = document.getElementById('selectedList');
+        const servicesContainer = document.getElementById('servicesContainer');
+        const contactSection = document.getElementById('contactSection');
+        const detailsForm = document.getElementById('detailsForm');
         const successMessage = document.getElementById('successMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        
+        const serviceMap = {
+            'option1': 'form1',
+            'option2': 'form2',
+            'option3': 'form3',
+            'option4': 'form4'
+        };
         
         // Add event listeners to checkboxes
         checkboxes.forEach(checkbox => {
             checkbox.addEventListener('change', updateFormVisibility);
         });
         
+        resetBtn.addEventListener('click', resetAll);
+        detailsForm.addEventListener('submit', submitForm);
+        
+        // Gmail validation
+        document.getElementById('gmail').addEventListener('blur', validateGmail);
+        document.getElementById('instagram').addEventListener('blur', validateInstagram);
+        
         function updateFormVisibility() {
             const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
             
             if (anyChecked) {
-                form.classList.add('active');
-                updateSelectedList();
+                servicesContainer.classList.add('active');
+                contactSection.classList.add('active');
+                updateVisibleForms();
             } else {
-                form.classList.remove('active');
+                servicesContainer.classList.remove('active');
                 successMessage.classList.remove('show');
             }
         }
         
-        function updateSelectedList() {
-            selectedList.innerHTML = '';
+        function updateVisibleForms() {
+            // Hide all forms first
+            document.querySelectorAll('.service-form').forEach(form => {
+                form.classList.remove('active');
+            });
+            
+            // Show only checked forms
             checkboxes.forEach(checkbox => {
                 if (checkbox.checked) {
-                    const tag = document.createElement('span');
-                    tag.className = 'selected-tag';
-                    tag.textContent = checkbox.value;
-                    selectedList.appendChild(tag);
+                    const formId = serviceMap[checkbox.id];
+                    const form = document.getElementById(formId);
+                    if (form) {
+                        form.classList.add('active');
+                    }
                 }
             });
         }
         
-        // Form submission
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+        function validateGmail() {
+            const gmailInput = document.getElementById('gmail');
+            const gmailError = document.getElementById('gmailError');
+            const email = gmailInput.value.trim();
             
-            const selectedServices = Array.from(checkboxes)
-                .filter(cb => cb.checked)
-                .map(cb => cb.value);
+            if (!email) {
+                gmailError.textContent = 'Gmail address is required';
+                gmailError.classList.add('show');
+                gmailInput.classList.add('error');
+                return false;
+            }
             
-            const topic = document.getElementById('topic').value;
-            const description = document.getElementById('description').value;
+            if (!email.endsWith('@gmail.com')) {
+                gmailError.textContent = 'Please enter a valid Gmail address (must end with @gmail.com)';
+                gmailError.classList.add('show');
+                gmailInput.classList.add('error');
+                return false;
+            }
             
-            // Display success message
-            successMessage.classList.add('show');
+            gmailError.classList.remove('show');
+            gmailInput.classList.remove('error');
+            return true;
+        }
+        
+        function validateInstagram() {
+            const instagramInput = document.getElementById('instagram');
+            const instagramError = document.getElementById('instagramError');
+            const instagram = instagramInput.value.trim();
             
-            // Log the data (in a real application, this would be sent to a server)
-            console.log({
-                services: selectedServices,
-                topic: topic,
-                description: description
+            if (!instagram) {
+                instagramError.textContent = 'Instagram ID is required';
+                instagramError.classList.add('show');
+                instagramInput.classList.add('error');
+                return false;
+            }
+            
+            // Basic Instagram ID validation (letters, numbers, dots, underscores)
+            const instagramRegex = /^[a-zA-Z0-9._]{1,30}$/;
+            if (!instagramRegex.test(instagram)) {
+                instagramError.textContent = 'Invalid Instagram ID (only letters, numbers, dots, and underscores allowed)';
+                instagramError.classList.add('show');
+                instagramInput.classList.add('error');
+                return false;
+            }
+            
+            instagramError.classList.remove('show');
+            instagramInput.classList.remove('error');
+            return true;
+        }
+        
+        function validateAllFields() {
+            let isValid = true;
+            
+            // Validate service form fields
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const formIndex = checkbox.id.replace('option', '');
+                    const topicInput = document.getElementById('topic' + formIndex);
+                    const descriptionInput = document.getElementById('description' + formIndex);
+                    const topicError = document.getElementById('error' + formIndex);
+                    const descError = document.getElementById('error-desc' + formIndex);
+                    
+                    if (!topicInput.value.trim()) {
+                        topicError.textContent = 'This field is required';
+                        topicError.classList.add('show');
+                        topicInput.classList.add('error');
+                        isValid = false;
+                    } else {
+                        topicError.classList.remove('show');
+                        topicInput.classList.remove('error');
+                    }
+                    
+                    if (!descriptionInput.value.trim()) {
+                        descError.textContent = 'This field is required';
+                        descError.classList.add('show');
+                        descriptionInput.classList.add('error');
+                        isValid = false;
+                    } else {
+                        descError.classList.remove('show');
+                        descriptionInput.classList.remove('error');
+                    }
+                }
             });
             
-            // Reset form after 2 seconds
+            // Validate contact fields
+            if (!validateGmail()) {
+                isValid = false;
+            }
+            
+            if (!validateInstagram()) {
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+        
+        function submitForm(e) {
+            e.preventDefault();
+            
+            if (!validateAllFields()) {
+                return;
+            }
+            
+            const formData = {
+                services: [],
+                gmail: document.getElementById('gmail').value,
+                instagram: document.getElementById('instagram').value
+            };
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const formIndex = checkbox.id.replace('option', '');
+                    formData.services.push({
+                        name: checkbox.value,
+                        topic: document.getElementById('topic' + formIndex).value,
+                        description: document.getElementById('description' + formIndex).value
+                    });
+                }
+            });
+            
+            console.log('Form submitted:', formData);
+            
+            successMessage.classList.add('show');
+            
             setTimeout(() => {
-                form.reset();
-                form.classList.remove('active');
-                successMessage.classList.remove('show');
-                checkboxes.forEach(cb => cb.checked = false);
+                resetAll();
             }, 2000);
-        });
+        }
+        
+        function resetAll() {
+            detailsForm.reset();
+            checkboxes.forEach(cb => cb.checked = false);
+            document.querySelectorAll('.service-form').forEach(form => {
+                form.classList.remove('active');
+            });
+            servicesContainer.classList.remove('active');
+            successMessage.classList.remove('show');
+            document.querySelectorAll('.error-message').forEach(msg => {
+                msg.classList.remove('show');
+            });
+            document.querySelectorAll('input, textarea').forEach(field => {
+                field.classList.remove('error');
+            });
+        }
     </script>
 </body>
 </html>
