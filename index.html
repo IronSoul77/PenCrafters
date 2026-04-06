@@ -13,7 +13,13 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #E6F3FF 0%, #F0FFF0 100%);
+            background: 
+                linear-gradient(135deg, rgba(230, 243, 255, 0.85) 0%, rgba(240, 255, 240, 0.85) 100%),
+                url('background-pattern.svg');
+            background-size: auto, cover;
+            background-position: 0 0, center;
+            background-repeat: repeat, no-repeat;
+            background-attachment: scroll, fixed;
             min-height: 100vh;
             display: flex;
             justify-content: center;
