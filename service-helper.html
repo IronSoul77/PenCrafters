@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pen Crafters - Service Helper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .emoji {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .options-section {
+            margin: 30px 0;
+        }
+        
+        .option-item {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option-item:hover {
+            background-color: #f0f0f0;
+            transform: translateX(5px);
+        }
+        
+        .option-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+        
+        .option-label {
+            flex: 1;
+            color: #333;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .option-number {
+            background-color: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .form-section {
+            display: none;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+        }
+        
+        .form-section.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .selected-options {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .selected-options p {
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .selected-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .selected-tag {
+            background-color: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn {
+            background-color: #667eea;
+            color: white;
+        }
+        
+        .submit-btn:hover {
+            background-color: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .reset-btn {
+            background-color: #ddd;
+            color: #333;
+        }
+        
+        .reset-btn:hover {
+            background-color: #ccc;
+        }
+        
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="emoji">✏️📚</div>
+            <h1>Hello There! Good to see you.</h1>
+            <p>What can we help you with today?</p>
+        </div>
+        
+        <div class="options-section">
+            <div class="option-item">
+                <div class="option-number">1</div>
+                <input type="checkbox" id="option1" name="service" value="Homework/Assignment help">
+                <label for="option1" class="option-label">Homework/Assignment help</label>
+            </div>
+            
+            <div class="option-item">
+                <div class="option-number">2</div>
+                <input type="checkbox" id="option2" name="service" value="PPT Preparation">
+                <label for="option2" class="option-label">PPT Preparation</label>
+            </div>
+            
+            <div class="option-item">
+                <div class="option-number">3</div>
+                <input type="checkbox" id="option3" name="service" value="Record">
+                <label for="option3" class="option-label">Record</label>
+            </div>
+            
+            <div class="option-item">
+                <div class="option-number">4</div>
+                <input type="checkbox" id="option4" name="service" value="PPT review">
+                <label for="option4" class="option-label">PPT review</label>
+            </div>
+        </div>
+        
+        <form id="detailsForm" class="form-section">
+            <div class="selected-options">
+                <p>Selected Services:</p>
+                <div class="selected-list" id="selectedList"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="topic">Concept/Topic:</label>
+                <input type="text" id="topic" name="topic" placeholder="Enter the main concept or topic" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" placeholder="Provide a detailed description for your selected options" required></textarea>
+            </div>
+            
+            <div class="buttons">
+                <button type="submit" class="submit-btn">Submit</button>
+                <button type="reset" class="reset-btn">Clear</button>
+            </div>
+        </form>
+        
+        <div class="success-message" id="successMessage">
+            ✓ Your request has been submitted successfully!
+        </div>
+    </div>
+    
+    <script>
+        const checkboxes = document.querySelectorAll('input[name="service"]');
+        const form = document.getElementById('detailsForm');
+        const selectedList = document.getElementById('selectedList');
+        const successMessage = document.getElementById('successMessage');
+        
+        // Add event listeners to checkboxes
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateFormVisibility);
+        });
+        
+        function updateFormVisibility() {
+            const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+            
+            if (anyChecked) {
+                form.classList.add('active');
+                updateSelectedList();
+            } else {
+                form.classList.remove('active');
+                successMessage.classList.remove('show');
+            }
+        }
+        
+        function updateSelectedList() {
+            selectedList.innerHTML = '';
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const tag = document.createElement('span');
+                    tag.className = 'selected-tag';
+                    tag.textContent = checkbox.value;
+                    selectedList.appendChild(tag);
+                }
+            });
+        }
+        
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const selectedServices = Array.from(checkboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+            
+            const topic = document.getElementById('topic').value;
+            const description = document.getElementById('description').value;
+            
+            // Display success message
+            successMessage.classList.add('show');
+            
+            // Log the data (in a real application, this would be sent to a server)
+            console.log({
+                services: selectedServices,
+                topic: topic,
+                description: description
+            });
+            
+            // Reset form after 2 seconds
+            setTimeout(() => {
+                form.reset();
+                form.classList.remove('active');
+                successMessage.classList.remove('show');
+                checkboxes.forEach(cb => cb.checked = false);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
