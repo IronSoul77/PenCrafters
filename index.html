@@ -288,7 +288,7 @@
             display: block;
             animation: slideIn 0.4s ease;
         }
-        
+
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -440,14 +440,27 @@
                 </div>
             </div>
             
-            <form id="detailsForm">
+            <form id="detailsForm" action="https://script.google.com/macros/s/AKfycbwEf9XoBzbf33V5nEwJiheHIaULeSWF7unjxRqGsxor9mBLZjP-GjgPuX3WDgqy6qjrjw/exec" method="POST" target="submissionFrame">
+                <input type="hidden" id="submittedName" name="name">
+                <input type="hidden" id="submittedEmail" name="email">
+                <input type="hidden" id="submittedInstagram" name="instagram">
+                <input type="hidden" id="submittedTopic1" name="topic1">
+                <input type="hidden" id="submittedDescription1" name="description1">
+                <input type="hidden" id="submittedTopic2" name="topic2">
+                <input type="hidden" id="submittedDescription2" name="description2">
+                <input type="hidden" id="submittedTopic3" name="topic3">
+                <input type="hidden" id="submittedDescription3" name="description3">
+                <input type="hidden" id="submittedTopic4" name="topic4">
+                <input type="hidden" id="submittedDescription4" name="description4">
                 <div class="buttons">
                     <button type="submit" class="submit-btn" id="submitBtn">Submit All</button>
                     <button type="reset" class="reset-btn" id="resetBtn">Clear All</button>
                 </div>
             </form>
         </div>
-        
+
+        <iframe name="submissionFrame" id="submissionFrame" title="Form Submission" style="display: none;"></iframe>
+
         <div class="success-message" id="successMessage">
             ✓ Your request has been submitted successfully! We'll get back to you soon.
         </div>
@@ -459,8 +472,22 @@
         const contactSection = document.getElementById('contactSection');
         const detailsForm = document.getElementById('detailsForm');
         const successMessage = document.getElementById('successMessage');
+        const submissionFrame = document.getElementById('submissionFrame');
         const submitBtn = document.getElementById('submitBtn');
         const resetBtn = document.getElementById('resetBtn');
+        const submittedName = document.getElementById('submittedName');
+        const submittedEmail = document.getElementById('submittedEmail');
+        const submittedInstagram = document.getElementById('submittedInstagram');
+        const submittedTopic1 = document.getElementById('submittedTopic1');
+        const submittedDescription1 = document.getElementById('submittedDescription1');
+        const submittedTopic2 = document.getElementById('submittedTopic2');
+        const submittedDescription2 = document.getElementById('submittedDescription2');
+        const submittedTopic3 = document.getElementById('submittedTopic3');
+        const submittedDescription3 = document.getElementById('submittedDescription3');
+        const submittedTopic4 = document.getElementById('submittedTopic4');
+        const submittedDescription4 = document.getElementById('submittedDescription4');
+        let isSubmitting = false;
+        let submissionTimeoutId = null;
         
         const serviceMap = {
             'option1': 'form1',
@@ -476,6 +503,7 @@
         
         resetBtn.addEventListener('click', resetAll);
         detailsForm.addEventListener('submit', submitForm);
+        submissionFrame.addEventListener('load', handleIframeLoad);
         
         document.getElementById('customerName').addEventListener('blur', validateCustomerName);
         // Gmail validation
@@ -508,6 +536,7 @@
                 updateVisibleForms();
             } else {
                 servicesContainer.classList.remove('active');
+                contactSection.classList.remove('active');
                 successMessage.classList.remove('show');
             }
         }
@@ -579,6 +608,20 @@
             instagramInput.classList.remove('error');
             return true;
         }
+
+        function handleIframeLoad() {
+            if (!isSubmitting) {
+                return;
+            }
+
+            isSubmitting = false;
+            clearTimeout(submissionTimeoutId);
+            submitBtn.disabled = false;
+            successMessage.classList.add('show');
+            setTimeout(() => {
+                resetAll();
+            }, 2000);
+        }
         
         function validateAllFields() {
             let isValid = true;
@@ -636,32 +679,34 @@
             if (!validateAllFields()) {
                 return;
             }
-            
-            const formData = {
-                services: [],
-                customerName: document.getElementById('customerName').value,
-                gmail: document.getElementById('gmail').value,
-                instagram: document.getElementById('instagram').value
-            };
-            
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    const formIndex = checkbox.id.replace('option', '');
-                    formData.services.push({
-                        name: checkbox.value,
-                        topic: document.getElementById('topic' + formIndex).value,
-                        description: document.getElementById('description' + formIndex).value
-                    });
+
+            submittedName.value = document.getElementById('customerName').value.trim();
+            submittedEmail.value = document.getElementById('gmail').value.trim();
+            submittedInstagram.value = document.getElementById('instagram').value.trim();
+            submittedTopic1.value = document.getElementById('topic1').value.trim();
+            submittedDescription1.value = document.getElementById('description1').value.trim();
+            submittedTopic2.value = document.getElementById('topic2').value.trim();
+            submittedDescription2.value = document.getElementById('description2').value.trim();
+            submittedTopic3.value = document.getElementById('topic3').value.trim();
+            submittedDescription3.value = document.getElementById('description3').value.trim();
+            submittedTopic4.value = document.getElementById('topic4').value.trim();
+            submittedDescription4.value = document.getElementById('description4').value.trim();
+
+            isSubmitting = true;
+            submitBtn.disabled = true;
+            successMessage.classList.remove('show');
+
+            submissionTimeoutId = setTimeout(() => {
+                if (!isSubmitting) {
+                    return;
                 }
-            });
-            
-            console.log('Form submitted:', formData);
-            
-            successMessage.classList.add('show');
-            
-            setTimeout(() => {
-                resetAll();
-            }, 2000);
+
+                isSubmitting = false;
+                submitBtn.disabled = false;
+                alert('Something went wrong. Please try again.');
+            }, 15000);
+
+            detailsForm.submit();
         }
         
         function resetAll() {
@@ -671,6 +716,7 @@
                 form.classList.remove('active');
             });
             servicesContainer.classList.remove('active');
+            contactSection.classList.remove('active');
             successMessage.classList.remove('show');
             document.querySelectorAll('.error-message').forEach(msg => {
                 msg.classList.remove('show');
