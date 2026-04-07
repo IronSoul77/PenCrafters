@@ -424,6 +424,11 @@
                     <span>Contact Information</span>
                 </h3>
                 <div class="form-group">
+                    <label for="customerName">What should we call you? <span class="required-indicator">*</span></label>
+                    <input type="text" id="customerName" placeholder="YOur Name" required>
+                    <div class="error-message" id="customerNameError"></div>
+                </div>
+                <div class="form-group">
                     <label for="gmail">Gmail Address <span class="required-indicator">*</span></label>
                     <input type="email" id="gmail" placeholder="your.email@gmail.com" required>
                     <div class="error-message" id="gmailError"></div>
@@ -472,9 +477,27 @@
         resetBtn.addEventListener('click', resetAll);
         detailsForm.addEventListener('submit', submitForm);
         
+        document.getElementById('customerName').addEventListener('blur', validateCustomerName);
         // Gmail validation
         document.getElementById('gmail').addEventListener('blur', validateGmail);
         document.getElementById('instagram').addEventListener('blur', validateInstagram);
+
+        function validateCustomerName() {
+            const customerNameInput = document.getElementById('customerName');
+            const customerNameError = document.getElementById('customerNameError');
+            const customerName = customerNameInput.value.trim();
+
+            if (!customerName) {
+                customerNameError.textContent = 'Name is required';
+                customerNameError.classList.add('show');
+                customerNameInput.classList.add('error');
+                return false;
+            }
+
+            customerNameError.classList.remove('show');
+            customerNameInput.classList.remove('error');
+            return true;
+        }
         
         function updateFormVisibility() {
             const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
@@ -592,6 +615,10 @@
             });
             
             // Validate contact fields
+            if (!validateCustomerName()) {
+                isValid = false;
+            }
+
             if (!validateGmail()) {
                 isValid = false;
             }
@@ -612,6 +639,7 @@
             
             const formData = {
                 services: [],
+                customerName: document.getElementById('customerName').value,
                 gmail: document.getElementById('gmail').value,
                 instagram: document.getElementById('instagram').value
             };

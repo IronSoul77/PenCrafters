@@ -267,6 +267,11 @@
             </div>
             
             <div class="form-group">
+                <label for="customerName">What should we call you?</label>
+                <input type="text" id="customerName" name="customerName" placeholder="YOur Name" required>
+            </div>
+
+            <div class="form-group">
                 <label for="topic">Concept/Topic:</label>
                 <input type="text" id="topic" name="topic" placeholder="Enter the main concept or topic" required>
             </div>
@@ -338,6 +343,7 @@
             
             // Log the data (in a real application, this would be sent to a server)
             console.log({
+                customerName: document.getElementById('customerName').value,
                 services: selectedServices,
                 topic: topic,
                 description: description
